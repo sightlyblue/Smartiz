@@ -190,6 +190,7 @@ namespace Processing
             if (isOnTongue(i))
             {
                 op[i] -= 60;
+                Vy[i] -= 0.5;
                 if (op[i] < 255 && !isGameover())
                 {
                     counter--;
