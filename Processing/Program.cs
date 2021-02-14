@@ -138,7 +138,6 @@ namespace Processing
             }
             else if (timer < 0)
             {
-
                 Text("YOU LOSE! :(", Width / 2 - 100, Height / 2);
             }
         }
