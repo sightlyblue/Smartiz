@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processing", "Processing\Processing.csproj", "{C863DC3E-0822-4EE8-BF18-042222CB7A46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowCatcher", "Processing\SnowCatcher.csproj", "{C863DC3E-0822-4EE8-BF18-042222CB7A46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessingSketch", "ProcessingSketch\ProcessingSketch.csproj", "{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C863DC3E-0822-4EE8-BF18-042222CB7A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C863DC3E-0822-4EE8-BF18-042222CB7A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C863DC3E-0822-4EE8-BF18-042222CB7A46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
