@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowCatcher", "Processing\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessingSketch", "ProcessingSketch\ProcessingSketch.csproj", "{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowboard", "Snowboard\Snowboard.csproj", "{86DCC511-E30A-4AA2-89EA-24EAB3779DF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C06D13B7-EBCA-49D3-9320-684C7BF1D2A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DCC511-E30A-4AA2-89EA-24EAB3779DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DCC511-E30A-4AA2-89EA-24EAB3779DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DCC511-E30A-4AA2-89EA-24EAB3779DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DCC511-E30A-4AA2-89EA-24EAB3779DF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

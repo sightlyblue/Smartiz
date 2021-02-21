@@ -13,12 +13,17 @@ namespace Processing
             NetProcessing.Sketch.Line((int)x1, (int)y1, (int)x2, (int)y2);
         }
 
-        public void Circle(double x, double y, double d)
+        public static void Circle(double x, double y, double d)
         {
             NetProcessing.Sketch.Ellipse((int)x, (int)y, (int)d, (int)d);
         }
 
-        public void Image(PImage img, double x, double y, double w, double h)
+        public static void Triangle(double x1, double y1, double x2, double y2, double x3, double y3)
+        {
+            NetProcessing.Sketch.Triangle((int)x1, (int)y1, (int)x2, (int)y2, (int)x3, (int)y3);
+        }
+
+        public static void Image(PImage img, double x, double y, double w, double h)
         {
             NetProcessing.Sketch.Image(img, (int)x, (int)y, (int)w, (int)h);
         }
