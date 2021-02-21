@@ -1,57 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Processing
 {
-    public class SmartizSketch : NetProcessing.Sketch
-    {
-        public double DeltaTime { get; private set; }
-
-        private readonly Stopwatch _sw = new Stopwatch();
-
-        public static void Line(double x1, double y1, double x2, double y2)
-        {
-            NetProcessing.Sketch.Line((int)x1, (int)y1, (int)x2, (int)y2);
-        }
-
-
-        public void Circle(double x, double y, double d)
-        {
-            NetProcessing.Sketch.Ellipse((int)x, (int)y, (int)d, (int)d);
-        }
-
-        public void Image(PImage img, double x, double y, double w, double h)
-        {
-            NetProcessing.Sketch.Image(img, (int)x, (int)y, (int)w, (int)h);
-        }
-
-        public override void Setup()
-        {
-            base.Setup();
-
-            _sw.Start();
-        }
-
-        public sealed override void Draw()
-        {
-            DeltaTime = _sw.ElapsedMilliseconds;
-            _sw.Restart();
-            DrawFrame();
-        }
-
-        public virtual void DrawFrame()
-        {
-            //SKIP
-        }
-    }
-
     class Program : SmartizSketch
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -106,23 +60,23 @@ namespace Processing
 
         public override void DrawFrame()
         {
-            if (!isGameover())
+            if (!IsGameover())
             {
                 timer -= DeltaTime;
             }
             Background(21, 34, 56);
-            drawTongue();
-            moveTongue();
+            DrawTongue();
+            MoveTongue();
             for (int i = 0; i < n; i++)
             {
-                moveSnowflake(i);
-                updateSnowflake(i);
-                drawSnowflake(i);
+                MoveSnowflake(i);
+                UpdateSnowflake(i);
+                DrawSnowflake(i);
             }
-            drawDashboard();
+            DrawDashboard();
         }
 
-        private void drawDashboard()
+        private void DrawDashboard()
         {
             Fill(255);
             TextSize(25);
@@ -142,7 +96,7 @@ namespace Processing
             }
         }
 
-        private void drawSnowflake(int i)
+        private void DrawSnowflake(int i)
         {
             StrokeWeight(1);
             Stroke(255, 255, 255, Math.Max(0, op[i]));
@@ -174,23 +128,24 @@ namespace Processing
             Circle(X[i], Y[i], z[i]);
         }
 
-        private void moveSnowflake(int i)
+        private void MoveSnowflake(int i)
         {
             X[i] = Sin(20 * Y[i]) + X[i];
             Y[i] += Vy[i];
         }
 
-        private bool isOnTongue(int i)
+        private bool IsOnTongue(int i)
         {
             return Y[i] > tY + tHeight / 2 && X[i] > tX + tMargin && X[i] < tX + tWidth - tMargin && Y[i] < Height - tMargin;
         }
 
-        private void updateSnowflake(int i)
+        private void UpdateSnowflake(int i)
         {
-            if (isOnTongue(i))
+            if (IsOnTongue(i))
             {
                 op[i] -= 60;
-                if (op[i] < 255 && !isGameover())
+                Vy[i] -= 0.5;
+                if (op[i] < 255 && !IsGameover())
                 {
                     counter--;
                 }
@@ -203,12 +158,12 @@ namespace Processing
             }
         }
 
-        private void drawTongue()
+        private void DrawTongue()
         {
             Image(tongue, tX, tY, tWidth, tHeight);
         }
 
-        private void moveTongue()
+        private void MoveTongue()
         {
             tX += tSpeed;
             if (tX <= -50)
@@ -238,7 +193,7 @@ namespace Processing
             }
         }
 
-        private bool isGameover()
+        private bool IsGameover()
         {
             return counter == 0 || timer < 0;
         }
