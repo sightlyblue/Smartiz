@@ -8,6 +8,11 @@ namespace Processing
 
         private readonly Stopwatch _sw = new Stopwatch();
 
+        public static void Translate(double x, double y)
+        {
+            NetProcessing.Sketch.Translate((int)x, (int)y);
+        }
+
         public static void Line(double x1, double y1, double x2, double y2)
         {
             NetProcessing.Sketch.Line((int)x1, (int)y1, (int)x2, (int)y2);

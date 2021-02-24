@@ -7,13 +7,20 @@ using System.Threading.Tasks;
 
 namespace Snowboard
 {
-    public class Cloud : DrawableObject
+    public class Sun : DrawableObject
     {
+        public int Size { get; }
+
+        public Sun(int size)
+        {
+            this.Size = size;
+        }
+
         public override void Draw()
         {
             SmartizSketch.NoStroke();
-            SmartizSketch.Fill(255, 255, 255);
-            SmartizSketch.Circle(X, Y, 30);
+            SmartizSketch.Fill(249, 215, 28);
+            SmartizSketch.Circle(0, 0, Size);
         }
     }
 }

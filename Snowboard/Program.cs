@@ -21,22 +21,27 @@ namespace Snowboard
 
         public override void Setup()
         {
-
-
             Size(800, 600);
             Background(_backgroundColor);
             for (var i = 0; i < 3; ++i)
             {
-                _objects.Add(new Tree { X = 150 * (i + 1) + 50, Y = 150 });
+                _objects.Add(new Tree(50,100) { X = 150 * (i + 1) + 50, Y = 150 });
             }
             _objects.Add(new Cloud { X = 50, Y = 50 });
+            _objects.Add(new Sun(50) { X = 150, Y = 50 });
         }
 
         public override void DrawFrame()
         {
+           //TODO: create the SUN! :) :*
+
+
             foreach (var o in _objects)
             {
+                PushMatrix();
+                SmartizSketch.Translate(o.X,o.Y);
                 o.Draw();
+                PopMatrix();
             }
         }
 
