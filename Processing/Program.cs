@@ -4,7 +4,16 @@ using System.Linq;
 
 namespace Processing
 {
-    class Program : SmartizSketch
+    public class Snowflake
+    {
+        public double X;
+        public double Y;
+        public double z;
+        public double Vy;
+        public int op;
+    }
+
+    public class Program : SmartizSketch
     {
         [STAThread]
         static void Main()
@@ -12,11 +21,8 @@ namespace Processing
             new Program().Start();
         }
 
-        double[] X;
-        double[] Y;
-        double[] z;
-        int n = 30;
-        double[] Vy;
+        Snowflake[] snowflakes;
+
         PImage tongue;
         double tX;
         double tY;
@@ -24,7 +30,6 @@ namespace Processing
         double tHeight;
         double tMargin;
         int tSpeed = 0;
-        int[] op;
         int counter;
         double timer;
 
@@ -34,22 +39,20 @@ namespace Processing
 
             Size(600, 600);
             Background(21, 34, 56);
-            counter = n - 10;
+
+            snowflakes = new Snowflake[30];
+
+            counter = snowflakes.Length - 10;
             timer = 1000 * (counter + 10);
 
-            X = new double[n];
-            Y = new double[n];
-            z = new double[n];
-            Vy = new double[n];
-            op = new int[n];
-
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < snowflakes.Length; i++)
             {
-                X[i] = Random(Width - 10);
-                Y[i] = Random(Height);
-                z[i] = Random(7.12);
-                Vy[i] = Random(1, 5);
-                op[i] = 255;
+                snowflakes[i] = new Snowflake();
+                snowflakes[i].X = Random(Width - 10);
+                snowflakes[i].Y = Random(Height);
+                snowflakes[i].z = Random(7.12);
+                snowflakes[i].Vy = Random(1, 5);
+                snowflakes[i].op = 255;
             }
             tWidth = Width / 4;
             tHeight = Height / 4;
@@ -67,11 +70,11 @@ namespace Processing
             Background(21, 34, 56);
             DrawTongue();
             MoveTongue();
-            for (int i = 0; i < n; i++)
+            foreach (var s in snowflakes)
             {
-                MoveSnowflake(i);
-                UpdateSnowflake(i);
-                DrawSnowflake(i);
+                MoveSnowflake(s);
+                UpdateSnowflake(s);
+                DrawSnowflake(s);
             }
             DrawDashboard();
         }
@@ -96,65 +99,65 @@ namespace Processing
             }
         }
 
-        private void DrawSnowflake(int i)
+        private void DrawSnowflake(Snowflake s)
         {
             StrokeWeight(1);
-            Stroke(255, 255, 255, Math.Max(0, op[i]));
+            Stroke(255, 255, 255, Math.Max(0, s.op));
             NoFill();
-            Line(X[i], Y[i], X[i], Y[i] - 2 * z[i]);
-            Line(X[i], Y[i], X[i] + 2 * z[i], Y[i] - 1.5 * z[i]);
-            Line(X[i], Y[i], X[i] + 2 * z[i], Y[i] + 1.5 * z[i]);
-            Line(X[i], Y[i], X[i], Y[i] + 2 * z[i]);
-            Line(X[i], Y[i], X[i] - 2 * z[i], Y[i] - 1.5 * z[i]);
-            Line(X[i], Y[i], X[i] - 2 * z[i], Y[i] + 1.5 * z[i]);
+            Line(s.X, s.Y, s.X, s.Y - 2 * s.z);
+            Line(s.X, s.Y, s.X + 2 * s.z, s.Y - 1.5 * s.z);
+            Line(s.X, s.Y, s.X + 2 * s.z, s.Y + 1.5 * s.z);
+            Line(s.X, s.Y, s.X, s.Y + 2 * s.z);
+            Line(s.X, s.Y, s.X - 2 * s.z, s.Y - 1.5 * s.z);
+            Line(s.X, s.Y, s.X - 2 * s.z, s.Y + 1.5 * s.z);
 
-            Circle(X[i], Y[i] - 2.5 * z[i], z[i]);
-            Circle(X[i] + 2 * z[i], Y[i] - 1.5 * z[i], z[i]);
-            Circle(X[i] + 2 * z[i], Y[i] + 1.5 * z[i], z[i]);
-            Circle(X[i], Y[i] + 2.5 * z[i], z[i]);
-            Circle(X[i] - 2 * z[i], Y[i] - 1.5 * z[i], z[i]);
-            Circle(X[i] - 2 * z[i], Y[i] + 1.5 * z[i], z[i]);
+            Circle(s.X, s.Y - 2.5 * s.z, s.z);
+            Circle(s.X + 2 * s.z, s.Y - 1.5 * s.z, s.z);
+            Circle(s.X + 2 * s.z, s.Y + 1.5 * s.z, s.z);
+            Circle(s.X, s.Y + 2.5 * s.z, s.z);
+            Circle(s.X - 2 * s.z, s.Y - 1.5 * s.z, s.z);
+            Circle(s.X - 2 * s.z, s.Y + 1.5 * s.z, s.z);
 
-            Circle(X[i], Y[i], 2.5 * z[i]);
-            Circle(X[i], Y[i], 1.5 * z[i]);
+            Circle(s.X, s.Y, 2.5 * s.z);
+            Circle(s.X, s.Y, 1.5 * s.z);
 
-            Circle(X[i], Y[i] - 2.5 * z[i], 0.75 * z[i]);
-            Circle(X[i] + 2 * z[i], Y[i] - 1.5 * z[i], 0.75 * z[i]);
-            Circle(X[i] + 2 * z[i], Y[i] + 1.5 * z[i], 0.75 * z[i]);
-            Circle(X[i], Y[i] + 2.5 * z[i], 0.75 * z[i]);
-            Circle(X[i] - 2 * z[i], Y[i] - 1.5 * z[i], 0.75 * z[i]);
-            Circle(X[i] - 2 * z[i], Y[i] + 1.5 * z[i], 0.75 * z[i]);
+            Circle(s.X, s.Y - 2.5 * s.z, 0.75 * s.z);
+            Circle(s.X + 2 * s.z, s.Y - 1.5 * s.z, 0.75 * s.z);
+            Circle(s.X + 2 * s.z, s.Y + 1.5 * s.z, 0.75 * s.z);
+            Circle(s.X, s.Y + 2.5 * s.z, 0.75 * s.z);
+            Circle(s.X - 2 * s.z, s.Y - 1.5 * s.z, 0.75 * s.z);
+            Circle(s.X - 2 * s.z, s.Y + 1.5 * s.z, 0.75 * s.z);
 
-            Circle(X[i], Y[i], z[i]);
+            Circle(s.X, s.Y, s.z);
         }
 
-        private void MoveSnowflake(int i)
+        private void MoveSnowflake(Snowflake s)
         {
-            X[i] = Sin(20 * Y[i]) + X[i];
-            Y[i] += Vy[i];
+            s.X = Sin(20 * s.Y) + s.X;
+            s.Y += s.Vy;
         }
 
-        private bool IsOnTongue(int i)
+        private bool IsOnTongue(Snowflake s)
         {
-            return Y[i] > tY + tHeight / 2 && X[i] > tX + tMargin && X[i] < tX + tWidth - tMargin && Y[i] < Height - tMargin;
+            return s.Y > tY + tHeight / 2 && s.X > tX + tMargin && s.X < tX + tWidth - tMargin && s.Y < Height - tMargin;
         }
 
-        private void UpdateSnowflake(int i)
+        private void UpdateSnowflake(Snowflake s)
         {
-            if (IsOnTongue(i))
+            if (IsOnTongue(s))
             {
-                op[i] -= 60;
-                Vy[i] -= 0.5;
-                if (op[i] < 255 && !IsGameover())
+                s.op -= 60;
+                s.Vy -= 0.5;
+                if (s.op < 255 && !IsGameover())
                 {
                     counter--;
                 }
             }
-            else if (Y[i] > Height + z[i])
+            else if (s.Y > Height + s.z)
             {
-                Y[i] = -100;
-                X[i] += Random(-30, 30);
-                op[i] = 255;
+                s.Y = -100;
+                s.X += Random(-30, 30);
+                s.op = 255;
             }
         }
 
