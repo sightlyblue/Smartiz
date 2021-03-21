@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Masodfoku_egyenlet
+namespace Quadratic_Equation_Solver //Identifier: {_|a..z|A..Z}{_|a..z|A..Z|0..9}*
 {
-    class Program
+    class Program //{access modifier?} class {identifier}
     {
         public struct QuadtraticEquation
         {
-            public double A;
+            public double A; //{access modifier} {type} {identifier}
             public double B;
             public double C;
         }

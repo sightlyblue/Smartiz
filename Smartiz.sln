@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Hello_World\H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quadratic Equation Solver", "Quadratic Equation Solver\Quadratic Equation Solver.csproj", "{8FBE10F3-7BD6-43A9-8EF1-97ECC6676810}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quadratic Equation Plot", "Quadratic Equation Plot\Quadratic Equation Plot.csproj", "{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8FBE10F3-7BD6-43A9-8EF1-97ECC6676810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBE10F3-7BD6-43A9-8EF1-97ECC6676810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBE10F3-7BD6-43A9-8EF1-97ECC6676810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

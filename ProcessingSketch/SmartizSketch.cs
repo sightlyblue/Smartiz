@@ -18,6 +18,11 @@ namespace Processing
             NetProcessing.Sketch.Line((int)x1, (int)y1, (int)x2, (int)y2);
         }
 
+        public static void Point(double x1, double y1)
+        {
+            NetProcessing.Sketch.Point((int)x1, (int)y1);
+        }
+
         public static void Circle(double x, double y, double d)
         {
             NetProcessing.Sketch.Ellipse((int)x, (int)y, (int)d, (int)d);

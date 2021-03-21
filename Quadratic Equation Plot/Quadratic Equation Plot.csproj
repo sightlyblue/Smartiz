@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C863DC3E-0822-4EE8-BF18-042222CB7A46}</ProjectGuid>
+    <ProjectGuid>{2B482DEF-4997-42EB-9F0D-053AF0E3B2BF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Processing</RootNamespace>
-    <AssemblyName>Processing</AssemblyName>
+    <RootNamespace>Quadratic_Equation_Plot</RootNamespace>
+    <AssemblyName>Quadratic Equation Plot</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NetProcessing">
-      <HintPath>..\lib\NetProcessing.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\Smartiz\NetProcessing\NetProcessing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Snowflake.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -73,11 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="imgs\tongue.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProcessingSketch\ProcessingSketch.csproj">
