@@ -5,6 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//TODO: input refactor
+//TODO: zérushelyek kirajzolása
+//TODO: tick-ek és rács rajzolása
+//TODO: skálázás álítása külön + és - gombokkal
+//TODO: grafikus integrálszámítás
+//TODO: polinomok kirajzolása
+//TODO: plinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
+
+//TODO: kör kirajzolása Circle hívás nélkül
+//TODO: kocka kirajzolása izometrikusan
+//TODO: kocka forgatása Y tengely körül
 namespace Quadratic_Equation_Plot
 {
     public struct Rectangle
@@ -163,7 +174,7 @@ namespace Quadratic_Equation_Plot
             for (var x = -Width / 2; x < Width; x++)
             {
                 var y = a * x * x + b * x + c;
-                Stroke(255);
+                Stroke(80,133,188);
                 StrokeWeight(2);
                 double X = x + Width / 2;
                 double Y = -y + Height / 2;
