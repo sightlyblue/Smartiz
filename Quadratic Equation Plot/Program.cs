@@ -8,10 +8,10 @@ using System.Windows.Forms;
 //TODO: input refactor
 //TODO: zérushelyek kirajzolása
 //TODO: tick-ek és rács rajzolása
-//TODO: skálázás álítása külön + és - gombokkal
+//TODO: skálázás állítása külön + és - gombokkal
 //TODO: grafikus integrálszámítás
 //TODO: polinomok kirajzolása
-//TODO: plinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
+//TODO: pplinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
 
 //TODO: kör kirajzolása Circle hívás nélkül
 //TODO: kocka kirajzolása izometrikusan
@@ -64,6 +64,7 @@ namespace Quadratic_Equation_Plot
         double a = 0.1;
         double b = 10;
         double c = -8;
+        double scale = 50;
         int TposX = 20;
         int TposY = 40;
         int RposX;
@@ -75,6 +76,8 @@ namespace Quadratic_Equation_Plot
         Button Button4;
         Button Button5;
         Button Button6;
+        Button ButtonPlus;
+        Button ButtonMinus;
         //RposX = TposX + 50; //Variable assignment := statement
 
         public override void Setup()
@@ -88,32 +91,62 @@ namespace Quadratic_Equation_Plot
             Button4 = new Button(RposX, TposY + 25 + ButtonHeight, ButtonWidth, ButtonHeight, Direction.Down);
             Button5 = new Button(RposX, TposY + 65, ButtonWidth, ButtonHeight, Direction.Up);
             Button6 = new Button(RposX, TposY + 65 + ButtonHeight, ButtonWidth, ButtonHeight, Direction.Down);
+            ButtonPlus = new Button(Width - 60, TposY - 15, ButtonWidth + 10, ButtonHeight + 10, Direction.Up);
+            ButtonMinus = new Button(Width - 60, TposY - 15 + ButtonHeight + 10, ButtonWidth + 10, ButtonHeight + 10, Direction.Down);
         }
 
         public override void DrawFrame()
         {
             Background(0);
+            DrawCoordinateSystem();
+            DrawDashboard();
+            DrawParabola(a, b, c);
+        }
+
+        public void DrawCoordinateSystem()
+        {
             Stroke(255);
             StrokeWeight(1);
             Line(Width / 2, 0, Width / 2, Height);
             Line(0, Height / 2, Width, Height / 2);
-            DrawDashboard();
-            DrawParabola(a, b, c);
+            double stepX = Width / scale;
+            double stepY = Height / scale;
+            for (double i = 0; i < Width; i += stepX)
+            {
+                Stroke(113, 114, 120, 150);
+                Line(0, i, Width, i);
+                Stroke(255);
+                Line(Width / 2 - 2, i, Width / 2 + 2, i);
+            }
+            for (double i = 0; i < Width; i += stepY)
+            {
+                Stroke(113, 114, 120, 150);
+                Line(i, 0, i, Height);
+                Stroke(255);
+                Line(i, Height / 2 - 2, i, Height / 2 + 2);
+            }
         }
 
         private void DrawDashboard()
         {
             Fill(255);
             TextSize(15);
+
             Text("A = " + a, TposX, TposY);
-            Text("B = " + b, TposX, TposY + 40);
-            Text("C = " + c, TposX, TposY + 80);
             DrawButton(Button1);
             DrawButton(Button2);
+
+            Text("B = " + b, TposX, TposY + 40);
             DrawButton(Button3);
             DrawButton(Button4);
+
+            Text("C = " + c, TposX, TposY + 80);
             DrawButton(Button5);
             DrawButton(Button6);
+
+            Text("Scale: " + scale, Width - 150, TposY);
+            DrawButton(ButtonPlus);
+            DrawButton(ButtonMinus);
         }
 
         public void DrawButton(Button b)
@@ -164,6 +197,15 @@ namespace Quadratic_Equation_Plot
             {
                 c = Math.Round(c - 1, 1);
             }
+
+            if (IsOn(ButtonPlus))
+            {
+                scale = Math.Round(scale - 1, 1);
+            }
+            else if (IsOn(ButtonMinus))
+            {
+                scale = Math.Round(scale + 1, 1);
+            }
         }
 
         public void DrawParabola(double a, double b, double c)
@@ -174,7 +216,7 @@ namespace Quadratic_Equation_Plot
             for (var x = -Width / 2; x < Width; x++)
             {
                 var y = a * x * x + b * x + c;
-                Stroke(80,133,188);
+                Stroke(80, 133, 188);
                 StrokeWeight(2);
                 double X = x + Width / 2;
                 double Y = -y + Height / 2;
