@@ -9,6 +9,7 @@ using System.Windows.Forms;
 //TODO: zérushelyek kirajzolása
 //TODO: tick-ek és rács rajzolása
 //TODO: skálázás állítása külön + és - gombokkal
+
 //TODO: grafikus integrálszámítás
 //TODO: polinomok kirajzolása
 //TODO: pplinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
@@ -16,6 +17,7 @@ using System.Windows.Forms;
 //TODO: kör kirajzolása Circle hívás nélkül
 //TODO: kocka kirajzolása izometrikusan
 //TODO: kocka forgatása Y tengely körül
+
 namespace Quadratic_Equation_Plot
 {
     public struct Rectangle
@@ -64,7 +66,7 @@ namespace Quadratic_Equation_Plot
         double a = 0.1;
         double b = 10;
         double c = -8;
-        double scale = 50;
+        double scale = 1;
         int TposX = 20;
         int TposY = 40;
         int RposX;
@@ -101,6 +103,7 @@ namespace Quadratic_Equation_Plot
             DrawCoordinateSystem();
             DrawDashboard();
             DrawParabola(a, b, c);
+            DrawRoots(a, b, c);
         }
 
         public void DrawCoordinateSystem()
@@ -111,19 +114,17 @@ namespace Quadratic_Equation_Plot
             Line(0, Height / 2, Width, Height / 2);
             double stepX = Width / scale;
             double stepY = Height / scale;
-            for (double i = 0; i < Width; i += stepX)
+            for (double i = 0; i < Width; i += 10)
             {
                 Stroke(113, 114, 120, 150);
-                Line(0, i, Width, i);
+                Line(0, scale * i, Width, scale * i);
                 Stroke(255);
-                Line(Width / 2 - 2, i, Width / 2 + 2, i);
-            }
-            for (double i = 0; i < Width; i += stepY)
-            {
+                Line(Width / 2 - 2, scale * i, Width / 2 + 2, scale * i);
+
                 Stroke(113, 114, 120, 150);
-                Line(i, 0, i, Height);
+                Line(scale * i, 0, scale * i, Height);
                 Stroke(255);
-                Line(i, Height / 2 - 2, i, Height / 2 + 2);
+                Line(scale * i, Height / 2 - 2, scale * i, Height / 2 + 2);
             }
         }
 
@@ -131,6 +132,8 @@ namespace Quadratic_Equation_Plot
         {
             Fill(255);
             TextSize(15);
+
+            //Text("f(x) = " + a + "x^2 + " + b + "x + " + c, TposX, TposY-20);
 
             Text("A = " + a, TposX, TposY);
             DrawButton(Button1);
@@ -200,11 +203,15 @@ namespace Quadratic_Equation_Plot
 
             if (IsOn(ButtonPlus))
             {
-                scale = Math.Round(scale - 1, 1);
+                scale = Math.Round(scale + 1, 1);
             }
             else if (IsOn(ButtonMinus))
             {
-                scale = Math.Round(scale + 1, 1);
+                scale = Math.Round(scale - 1, 1);
+                if (scale <= 0)
+                {
+                    scale = 1;
+                }
             }
         }
 
@@ -215,7 +222,7 @@ namespace Quadratic_Equation_Plot
 
             for (var x = -Width / 2; x < Width; x++)
             {
-                var y = a * x * x + b * x + c;
+                var y = scale * a * x * x + scale * b * x + scale * c;
                 Stroke(80, 133, 188);
                 StrokeWeight(2);
                 double X = x + Width / 2;
@@ -224,6 +231,22 @@ namespace Quadratic_Equation_Plot
                 pX = X;
                 pY = Y;
             }
+        }
+
+        public void DrawRoots(double a, double b, double c)
+        {
+            var d = b * b - 4 * a * c;
+            var x1 = ((-b) + Math.Sqrt(d)) / (2 * a);
+            var x2 = ((-b) - Math.Sqrt(d)) / (2 * a);
+
+            var px1 = x1 + Width / 2;
+            var px2 = x2 + Width / 2;
+            Stroke(200, 0, 0);
+            StrokeWeight(10);
+            Text("x1", Round(px1 + 5), Height / 2 + 10);
+            Point(px1, Height / 2);
+            Text("x2", Round(px2 + 5), Height / 2 + 10);
+            Point(px2, Height / 2);
         }
     }
 }
