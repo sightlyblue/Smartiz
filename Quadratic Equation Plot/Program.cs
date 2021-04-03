@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//TODO: input refactor
+//TODO: input refactor  _/
 //TODO: zérushelyek kirajzolása  _/
-//TODO: tick-ek és rács rajzolása
+//TODO: tick-ek és rács rajzolása  _/
 //TODO: skálázás állítása külön + és - gombokkal  _/
 
 //TODO: grafikus integrálszámítás
-//TODO: polinomok kirajzolása
+//TODO: polinomok kirajzolása  _/
 //TODO: polinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
 
 //TODO: kör kirajzolása Circle hívás nélkül
@@ -29,10 +29,8 @@ namespace Quadratic_Equation_Plot
             new Program().Start();
         }
 
-        double a = 0.1;
-        double b = 10;
-        double c = -8;
-        double scale = 5;
+        readonly List<double> Polinom = new List<double>() { 1/2+6/7d, -1/14d, -13/14d, 1/14d, 1/14d };
+        double scale = 50;
         int TposX = 20;
         int TposY = 40;
         int RposX;
@@ -68,8 +66,8 @@ namespace Quadratic_Equation_Plot
             Background(0);
             DrawCoordinateSystem();
             DrawDashboard();
-            DrawParabola(a, b, c);
-            DrawRoots(a, b, c);
+            DrawPolinom(Polinom);
+            //DrawRoots(a, b, c);
         }
 
         public void DrawCoordinateSystem()
@@ -78,6 +76,20 @@ namespace Quadratic_Equation_Plot
             StrokeWeight(1);
             Line(Width / 2, 0, Width / 2, Height);
             Line(0, Height / 2, Width, Height / 2);
+
+            for (double i = 0; i < Width; i += 10)
+            {
+                Stroke(113, 114, 120, 80);
+                Line(0, i, Width, i);
+                Stroke(255);
+                Line(Width / 2 - 2, i, Width / 2 + 2, i);
+                Stroke(113, 114, 120, 80);
+                Line(i, 0, i, Height);
+                Stroke(255);
+                Line(i, Height / 2 - 2, i, Height / 2 + 2);
+            }
+
+            /*
             double stepX = Width / (scale*10);
             double stepY = Height / (scale*10);
 
@@ -96,6 +108,7 @@ namespace Quadratic_Equation_Plot
                 Stroke(255);
                 Line(i, Height / 2 - 2, i, Height / 2 + 2);
             }
+            */
         }
 
         private void DrawDashboard()
@@ -105,19 +118,19 @@ namespace Quadratic_Equation_Plot
 
             //Text("f(x) = " + a + "x^2 + " + b + "x + " + c, TposX, TposY-20);
 
-            Text("A = " + a, TposX, TposY);
+            Text("A = " + Math.Round(Polinom[0]), TposX, TposY);
             DrawButton(Button1);
             DrawButton(Button2);
 
-            Text("B = " + b, TposX, TposY + 40);
+            Text("B = " + Math.Round(Polinom[1]), TposX, TposY + 40);
             DrawButton(Button3);
             DrawButton(Button4);
 
-            Text("C = " + c, TposX, TposY + 80);
+            Text("C = " + Math.Round(Polinom[2]), TposX, TposY + 80);
             DrawButton(Button5);
             DrawButton(Button6);
 
-            Text("Scale: " + scale, Width - 150, TposY);
+            Text("Scale: " + Math.Round(scale), Width - 150, TposY);
             DrawButton(ButtonPlus);
             DrawButton(ButtonMinus);
         }
@@ -159,76 +172,88 @@ namespace Quadratic_Equation_Plot
         {
             if (IsOn(Button1))
             {
-                a = Math.Round(a + 0.1, 1);
+                Polinom[0] = Math.Round(Polinom[0] + 1, 1);
             }
             else if (IsOn(Button2))
             {
-                a = Math.Round(a - 0.1, 1);
+                Polinom[0] = Math.Round(Polinom[0] - 1, 1);
             }
             else if (IsOn(Button3))
             {
-                b = Math.Round(b + 1, 1);
+                Polinom[1] = Math.Round(Polinom[1] + 1, 1);
             }
             else if (IsOn(Button4))
             {
-                b = Math.Round(b - 1, 1);
+                Polinom[1] = Math.Round(Polinom[1] - 1, 1);
             }
             else if (IsOn(Button5))
             {
-                c = Math.Round(c + 1, 1);
+                Polinom[2] = Math.Round(Polinom[2] + 1, 1);
             }
             else if (IsOn(Button6))
             {
-                c = Math.Round(c - 1, 1);
+                Polinom[2] = Math.Round(Polinom[2] - 1, 1);
             }
 
             if (IsOn(ButtonPlus))
             {
-                scale = Math.Round(scale + 1, 1);
+                scale = scale *= 1.1;
             }
             else if (IsOn(ButtonMinus))
             {
-                scale = Math.Round(scale - 1, 1);
-                if (scale <= 0)
-                {
-                    scale = 1;
-                }
+                scale = scale /= 1.1;
             }
         }
 
-        public void DrawParabola(double a, double b, double c)
+        public void DrawPolinom(List<double> polinom)
         {
-            double pX = 0;
-            double pY = 0;
+            double previousX = -10;
+            double previousY = -10;
 
-            for (var x = -Width / 2; x < Width; x++)
+            for (var x = -1; x < Width; x++)
             {
-                var y = a * Math.Pow(x, 2) + b * Math.Pow(x, 1) + c;
-                Stroke(80, 133, 188);
-                StrokeWeight(2);
-                double X = x + Width / 2;
-                double Y = -y + Height / 2;
-                Line(X, Y, pX, pY);
-                pX = X;
-                pY = Y;
+                var y = CalculatePolinom(polinom, (x - Width/2)/scale);
+                double finalY = -y*scale + Height / 2;
+                if (finalY < Height+100 && finalY >= -100)
+                {
+                    Stroke(80, 133, 188);
+                    StrokeWeight(2);
+                    Line(x, finalY, previousX, previousY);
+                }
+                previousX = x;
+                previousY = finalY;
             }
         }
 
-        public void DrawRoots(double a, double b, double c)
+        private double CalculatePolinom(List<double> polinom, double x)
         {
-            var d = (b * b - 4 * a * c);
-            var x1 = ((-b) + Math.Sqrt(d)) / (2 * a);
-            var x2 = ((-b) - Math.Sqrt(d)) / (2 * a);
+            var sum = 0d;
+            for (int a = 0; a < polinom.Count; a++)
+            {
+                sum += polinom[a] * Math.Pow(x, a);
+            }
+            return sum;
 
-            var px1 = x1 + Width / 2;
-            var px2 = x2 + Width / 2;
+            /*public double P(double x, List<double> c)
+                => Enumerable.Range(0, c.Count)
+                .Select(i => c[i] * Math.Pow(x, i))
+                .Sum();*/
+        }
+
+        public void DrawRoots(List<double> polinom)
+        {
+            var rX = CalculateRoot(polinom, x);
+
+            var px = rX + Width / 2;
             Stroke(200, 0, 0);
             StrokeWeight(10);
             TextSize(15);
-            Text("x1", Round(px1 + 5), Height / 2 + 10);
-            Point(px1, Height / 2);
-            Text("x2", Round(px2 + 5), Height / 2 + 10);
-            Point(px2, Height / 2);
+            Point(px, Height / 2);
+        }
+
+        private object CalculateRoot(List<double> polinom, double x)
+        {
+            var y = 
         }
     }
 }
