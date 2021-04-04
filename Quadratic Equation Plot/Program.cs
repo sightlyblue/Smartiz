@@ -228,8 +228,6 @@ namespace Quadratic_Equation_Plot
             }
         }
 
-
-
         //public void DrawRoots(List<double> polinom)
         //{
         //    var rX = Root(polinom, x);
@@ -239,13 +237,6 @@ namespace Quadratic_Equation_Plot
         //    StrokeWeight(10);
         //    TextSize(15);
         //    Point(px, Height / 2);
-        //}
-
-        
-
-        //private object Root(List<double> polinom, double x)
-        //{
-        //    var y =
         //}
     }
 
@@ -269,7 +260,7 @@ namespace Quadratic_Equation_Plot
 
         public static double[] Roots(List<double> list)
         {
-            throw new NotImplementedException();
+            
         }
 
         public static List<double> Diff(List<double> polinom)
