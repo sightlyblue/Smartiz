@@ -21,6 +21,27 @@ using System.Windows.Forms;
 
 namespace Quadratic_Equation_Plot
 {
+    public struct QuadtraticEquation
+    {
+        public double A; //{access modifier} {type} {identifier}
+        public double B;
+        public double C;
+
+        public static QuadtraticEquation FromPolinom(List<double> polinom)
+        {
+            // 5+3 -> Kifejezés (expression), aminek az értékét ki lehet számolni.
+            if (polinom.Count != 3)
+            {
+                throw new ArgumentException("The polinom is not a quadratic function", nameof(polinom)); //constructor hívás (függvény hívás) []
+            }
+            else
+            {
+                polinom.Add(C);
+                polinom.Add(B);
+                polinom.Add(A);
+            }
+        }
+    }
 
     public class Program : SmartizSketch
     {
@@ -258,9 +279,38 @@ namespace Quadratic_Equation_Plot
             return extremes.ToArray();
         }
 
-        public static double[] Roots(List<double> list)
+        public static double[] Roots(List<double> polinom)
         {
-            
+            var roots = new List<double>(polinom.Count);
+            if (polinom.Count > 1)
+            {
+                //TODO: ?
+            }
+            return roots.ToArray();
+        }
+
+        public static double Discriminant(QuadtraticEquation e)
+        {
+            return e.B * e.B - 4 * e.A * e.C;
+        }
+
+        public static double[] Solve(QuadtraticEquation e)
+        {
+            var d = Discriminant(e);
+            if (d < 0)
+            {
+                return new double[0];
+            }
+
+            var x1 = ((-e.B) + Math.Sqrt(d)) / (2 * e.A);
+            var x2 = ((-e.B) - Math.Sqrt(d)) / (2 * e.A);
+
+            if (x1 == x2)
+            {
+                return new double[] { x1 };
+            }
+
+            return new double[] { x1, x2 };
         }
 
         public static List<double> Diff(List<double> polinom)
