@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Processing
 {
-    class SnowflakeClass
+    public class SnowflakeClass
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -59,6 +59,17 @@ namespace Processing
         {
             X = Math.Sin(20 * Y) + X;
             Y += Velocity;
+        }
+
+        public void Melt()
+        {
+            Opacity -= 60;
+            Velocity -= 0.5;
+        }
+
+        public bool IsMelted()
+        {
+            return Opacity < 255;
         }
     }
 }
