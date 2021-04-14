@@ -91,11 +91,11 @@ namespace Processing
             TextSize(40);
             if (counter == 0)
             {
-                Text("YOU WIN! :)", Width / 2 - 100, Height / 2);
+                Text("YOU WON! :)", Width / 2 - 100, Height / 2);
             }
             else if (timer < 0)
             {
-                Text("YOU LOSE! :(", Width / 2 - 100, Height / 2);
+                Text("YOU LOST! :(", Width / 2 - 100, Height / 2);
             }
         }
 
