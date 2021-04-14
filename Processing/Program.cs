@@ -84,15 +84,8 @@ namespace Processing
             }
             else if (IsOutsideCanvas(snow))
             {
-                Reset(snow);
+                snow.Refresh();
             }
-        }
-
-        private void Reset(SnowflakeClass snow)
-        {
-            snow.Y = -100;
-            snow.X += Random(-30, 30);
-            snow.Opacity = 255;
         }
 
         private bool IsOutsideCanvas(SnowflakeClass snow)

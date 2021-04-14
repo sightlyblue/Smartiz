@@ -71,5 +71,12 @@ namespace Processing
         {
             return Opacity < 255;
         }
+
+        public void Refresh()
+        {
+            Y = -100;
+            X += SmartizSketch.Random(-30, 30);
+            Opacity = 255;
+        }
     }
 }
