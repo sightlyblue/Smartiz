@@ -15,27 +15,27 @@ using System.Windows.Forms;
 
 namespace Quadratic_Equation_Plot
 {
-    public struct QuadtraticEquation
-    {
-        public double A; //{access modifier} {type} {identifier}
-        public double B;
-        public double C;
+    //public struct QuadtraticEquation
+    //{
+    //    public double A; //{access modifier} {type} {identifier}
+    //    public double B;
+    //    public double C;
 
-        public static QuadtraticEquation FromPolinom(List<double> polinom)
-        {
-            // 5+3 -> Kifejezés (expression), aminek az értékét ki lehet számolni.
-            if (polinom.Count != 3)
-            {
-                throw new ArgumentException("The polinom is not a quadratic function", nameof(polinom)); //constructor hívás (függvény hívás) []
-            }
-            else
-            {
-                polinom.Add(C);
-                polinom.Add(B);
-                polinom.Add(A);
-            }
-        }
-    }
+    //    public static QuadtraticEquation FromPolinom(List<double> polinom)
+    //    {
+    //        // 5+3 -> Kifejezés (expression), aminek az értékét ki lehet számolni.
+    //        if (polinom.Count != 3)
+    //        {
+    //            throw new ArgumentException("The polinom is not a quadratic function", nameof(polinom)); //constructor hívás (függvény hívás) []
+    //        }
+    //        else
+    //        {
+    //            polinom.Add(C);
+    //            polinom.Add(B);
+    //            polinom.Add(A);
+    //        }
+    //    }
+    //}
 
     public class Program : SmartizSketch
     {
@@ -106,27 +106,6 @@ namespace Quadratic_Equation_Plot
                 Stroke(255);
                 Line(i, Height / 2 - 2, i, Height / 2 + 2);
             }
-
-            /*
-            double stepX = Width / (scale*10);
-            double stepY = Height / (scale*10);
-
-            for (double i = 0; i < Height; i += stepY)
-            {
-                Stroke(113, 114, 120, 150);
-                Line(0, i, Width, i);
-                Stroke(255);
-                Line(Width / 2 - 2, i, Width / 2 + 2, i);
-            }
-
-            for (double i = 0; i < Width; i += stepX)
-            {
-                Stroke(113, 114, 120, 150);
-                Line(i, 0, i, Height);
-                Stroke(255);
-                Line(i, Height / 2 - 2, i, Height / 2 + 2);
-            }
-            */
         }
 
         private void DrawDashboard()
@@ -283,29 +262,29 @@ namespace Quadratic_Equation_Plot
             return roots.ToArray();
         }
 
-        public static double Discriminant(QuadtraticEquation e)
-        {
-            return e.B * e.B - 4 * e.A * e.C;
-        }
+        //public static double Discriminant(QuadtraticEquation e)
+        //{
+        //    return e.B * e.B - 4 * e.A * e.C;
+        //}
 
-        public static double[] Solve(QuadtraticEquation e)
-        {
-            var d = Discriminant(e);
-            if (d < 0)
-            {
-                return new double[0];
-            }
+        //public static double[] Solve(QuadtraticEquation e)
+        //{
+        //    var d = Discriminant(e);
+        //    if (d < 0)
+        //    {
+        //        return new double[0];
+        //    }
 
-            var x1 = ((-e.B) + Math.Sqrt(d)) / (2 * e.A);
-            var x2 = ((-e.B) - Math.Sqrt(d)) / (2 * e.A);
+        //    var x1 = ((-e.B) + Math.Sqrt(d)) / (2 * e.A);
+        //    var x2 = ((-e.B) - Math.Sqrt(d)) / (2 * e.A);
 
-            if (x1 == x2)
-            {
-                return new double[] { x1 };
-            }
+        //    if (x1 == x2)
+        //    {
+        //        return new double[] { x1 };
+        //    }
 
-            return new double[] { x1, x2 };
-        }
+        //    return new double[] { x1, x2 };
+        //}
 
         public static List<double> Diff(List<double> polinom)
         {
@@ -327,12 +306,11 @@ namespace Quadratic_Equation_Plot
             }
             return sum;
 
-            /* SQL-esen :)
-            public double P(double x, List<double> c)
-                => Enumerable.Range(0, c.Count)
-                .Select(i => c[i] * Math.Pow(x, i))
-                .Sum();
-            */
+            //SQL-esen :)
+            //public double P(double x, List<double> c)
+            //    => Enumerable.Range(0, c.Count)
+            //    .Select(i => c[i] * Math.Pow(x, i))
+            //    .Sum();
         }
     }
 }
