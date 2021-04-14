@@ -6,15 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//TODO: input refactor  _/
-//TODO: zérushelyek kirajzolása  _/
-//TODO: tick-ek és rács rajzolása  _/
-//TODO: skálázás állítása külön + és - gombokkal  _/
-
+//TODO: csúszkás skálázás
 //TODO: grafikus integrálszámítás
-//TODO: polinomok kirajzolása  _/
 //TODO: polinomok analízise: x0, min/max -> numerikusv v. diszkrét megoldás?
-
 //TODO: kör kirajzolása Circle hívás nélkül
 //TODO: kocka kirajzolása izometrikusan
 //TODO: kocka forgatása Y tengely körül
