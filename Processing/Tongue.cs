@@ -2,7 +2,7 @@
 
 namespace Processing
 {
-    public class Tongue
+    public class Tongue : DrawableObject
     {
         public Sketch.PImage tongue { get; set; }
         public double X { get; set; }
@@ -22,7 +22,7 @@ namespace Processing
             this.Y = height - Height + 30;
         }
 
-        public void Draw()
+        public override void Draw()
         {
             SmartizSketch.Image(tongue, X, Y, Width, Height);
         }

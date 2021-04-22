@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Processing
 {
-    public class SnowflakeClass
+    public class SnowflakeClass : DrawableObject
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -23,7 +23,7 @@ namespace Processing
             this.Opacity = Opacity;
         }
 
-        public void Draw()
+        public override void Draw()
         {
             SmartizSketch.StrokeWeight(1);
             SmartizSketch.Stroke(255, 255, 255, Math.Max(0, Opacity));
