@@ -14,7 +14,7 @@ namespace Processing
 
         public Tongue(int width, int height)
         {
-            tongue = Sketch.LoadImage("imgs\\tongue.png");
+            tongue = Sketch.LoadImage("imgs\\plant.png");
             this.Width = width / 4;
             this.Height = height / 4;
             this.Margin = Width / 4;
